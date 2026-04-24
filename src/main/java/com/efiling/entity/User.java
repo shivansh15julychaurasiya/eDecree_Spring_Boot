@@ -73,10 +73,19 @@ public class User {
 	private Date otpGeneratedTime;
 	
 	
-	
+	@Transient
+	private CourtMaster courtMaster;
 
 
 
+
+	public CourtMaster getCourtMaster() {
+		return courtMaster;
+	}
+
+	public void setCourtMaster(CourtMaster courtMaster) {
+		this.courtMaster = courtMaster;
+	}
 
 	public Date getOtpGeneratedTime() {
 		return otpGeneratedTime;

@@ -2,6 +2,7 @@ package com.efiling.service;
 
 import java.util.Date;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -20,6 +21,14 @@ public class JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 15)) // 15 min
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();
+    }
+    
+    
+    public boolean validateToken(String token, UserDetails userDetails) {
+
+        final String username = extractUsername(token);
+
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
     
     public String generateRefreshToken(String username) {

@@ -20,7 +20,7 @@ import com.efiling.repository.UserRoleRepository;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepo;
+    private UserService userService;
 
     @Autowired
     private UserRoleRepository urRepo;
@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) {
 
-        User user = userRepo.findByUsername(username);
+        User user = userService.getByUsername(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
